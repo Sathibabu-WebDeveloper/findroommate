@@ -1,0 +1,44 @@
+<div class="row"> 
+    <div class="col s12 m3" style="">
+          <%=render 'user_dashboard/navigation' %>
+    </div>
+      <div class="col s12 m9">
+    	
+    	<%@plans.each do |plan|%>
+        <div class="col s12 m6">
+          <div class="card green lighten-2 darken-1">
+            <div class="card-content white-text">
+              <span class="card-title"><%=plan.title%></span>
+              <p>$<%=plan.price.to_i%> per year</p>
+              <p><%=plan.description%></p>
+            </div>
+            <div class="card-action">
+             <%=link_to 'Subscibe', new_plan_subscription_path(plan) %>    
+            </div>
+          </div>
+        </div>
+        <%end%>
+
+     
+      </div>
+</div>
+
+
+
+
+
+
+<style type="text/css">
+.media-heading{
+  font-size: 18px !important;
+}
+.row{
+  margin-bottom: 0px !important;
+}
+.listings{
+   height: 650px;
+    overflow: auto;
+}
+</style>
+
+      

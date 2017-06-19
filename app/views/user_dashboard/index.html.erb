@@ -1,0 +1,272 @@
+<!-- Main START -->
+
+
+
+<div class="">
+  <div class="row"> 
+    <div class="col s12 m12">
+     
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col s12 m3" style="">
+    
+        
+           <%=render 'navigation' %>
+         
+     
+    </div>
+      <div class="row">
+        <div class="col s12 m9">
+           
+              <div class="" style="padding: 0px">
+             
+              <!--  Tables Section-->
+              <div id="messages" class="mailbox">
+                <div class="row">
+                  <div class="col s12">
+                <div class="z-depth-1">
+                  <ul class="tabs account" style="width: 100%;">
+                          <li class="col s4 tab"><a class="active" href="#personal">Profile</a></li>
+                          <li class="col s4 tab"><a href="#password" class="">Password</a></li>
+                          <li class="col s4 tab"><a href="#privacy" class="">Privacy</a></li>
+                      <div class="indicator" style="right: 629px; left: 0px;"></div></ul>
+                </div>
+                  </div>
+                  <div class="col s12">
+                    <div class="card-panel no-padding">
+                <!-- Personal tab START -->
+                 <div id="personal" style="display: block;">
+                 <%= simple_form_for(@profile, html: { class: "form-horizontal", role: "form" ,:multipart => true}) do |f| %>
+                 <div class="form-pad">
+                  <div class="row">
+                  <div class="col s12 m8 push-m4">
+                  <!-- Personal info FIELDS -->
+                    <div class="input-field">
+                       <%= f.input :first_name%>
+                    </div>
+                    <div class="input-field">
+                     <%= f.input :last_name%>
+                    </div>
+                    <div class="input-field">
+                      <%= f.input :gender, collection: [  "Male", "Female"], prompt: "Select Gender", selected: @profile.gender, label: false %>  
+                    </div>
+                    <div class="input-field">
+                        <input type="date" class="datepicker" id="profile_dob" name="profile[dob]" value="<%=@profile.dob%>">
+                       <label for="dob">DateofBirth</label>
+
+                     <%#= f.input :dob %>
+                    </div>
+                     <div class="input-field">
+                       <%= text_field_tag :email, "#{current_user.email}", class: 'form-control' %>
+                    </div>  
+                    <div class="input-field">
+                      <%= f.input :phone_no %>
+                    </div>                    
+                     <div class="input-field">
+                      <%= f.input :occupation, collection: [  "Student", "Employee", "Others" ], prompt: "Select occupation", selected: @profile.occupation, label: false %>  
+                    </div>
+                     <div class="input-field">
+                     <%= f.input :address,  :input_html => { :class => "materialize-textarea" }  %>
+                    </div>
+                   
+                    <div class="input-field">
+                      <div class="input-field">
+                     <%= f.input :about, :input_html => { :class => "materialize-textarea" }  %>
+                    </div>
+                    </div>
+                    
+                  </div>
+                  <div class="col s12 m4 pull-m8">
+                    <!-- Personal info PROFILE PHOTO -->
+                    <div class="form-pad center-align">
+                      <%=image_tag(@profile.picture.url(:thumb), class: 'iresponsive-img circle')%>
+                    <div class="file-field input-field">
+                      <div class="btn no-float primary-color">
+                         <span>Profile Pic</span>
+                        <%= f.file_field :picture %>
+                      </div>
+                      <div class="file-path-wrapper hide">
+                        <input class="file-path validate center-align" type="text">
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Save Cancel -->
+                <div class="row">
+                  <div class="col s12 m8 push-m4 buttons">
+                     <%= f.button :submit %>
+                    </div>
+                </div>
+                </div>
+              <% end %>
+                 </div>
+                 <!-- Personal tab END -->
+                 <!-- Password tab START -->
+                 <div id="password" style="display: none;">
+                  <%= simple_form_for(@user, :url => { :action => "update_password" } , :validate => true) do |f| %>
+                   <%#= f.error_notification %>
+                 <div class="form-pad">
+                  <div class="row">
+                  <div class="col s12">                                   
+                    <div class="input-field">
+                      <%= f.input :email, :as => :hidden %>
+                      <%= f.input :password, autocomplete: "off" %>
+                    </div>
+                    <div class="input-field">
+                      <%= f.input :password_confirmation %>
+                    </div>
+                    <div class="buttons">
+                      <%= f.button :submit, "Update" %>
+                      
+                    </div>
+                  </div>
+                </div>
+                 </div>
+                <% end %>
+                 </div>
+                 <!-- Password tab END -->
+                 <!-- Privacy tab START -->
+                 <div id="privacy" style="display: none;">
+                 <form>
+                 <div class="form-pad">
+                  <div class="row">
+                  <div class="col s12">
+                        <div class="row" style="margin-top: 20px;">
+                      <!-- Switch Title -->
+                      <div class="col s12 m8">
+                        <span>Visible my contact on listings</span>
+                      </div>
+                      <!-- Switch -->
+                      <div class="col s12 m4">
+                        <div class="switch right">
+                        <label>
+                          Off
+                           <input type="checkbox"  <%= @profile.profile_visible ? 'checked' : 'unchecked' %> data-id = "profile_visible" class="settings">
+                          <span class="lever"></span>
+                          On
+                        </label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="row" style="margin-top: 20px;">
+                      <!-- Switch Title -->
+                      <div class="col s12 m8">
+                        <span>Get notifications to registred mail</span>
+                      </div>
+                      <!-- Switch -->
+                      <div class="col s12 m4">
+                        <div class="switch right">
+                        <label>
+                          Off
+                          <input type="checkbox"  <%= @profile.email_notification ? 'checked' : 'unchecked' %> data-id = "email_notification" class="settings">
+                          <span class="lever"></span>
+                          On
+                        </label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="row" style="margin-top: 20px;">
+                      <!-- Switch Title -->
+                      <div class="col s12 m8">
+                        <span>Ut vestibulum nunc convallis</span>
+                      </div>
+                      <!-- Switch -->
+                      <div class="col s12 m4">
+                        <div class="switch right">
+                        <label>
+                          Off
+                          <input type="checkbox" checked="checked">
+                          <span class="lever"></span>
+                          On
+                        </label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="row" style="margin-top: 20px;">
+                      <!-- Switch Title -->
+                      <div class="col s12 m8">
+                        <span>Cras vitae lobortis lectus</span>
+                      </div>
+                      <!-- Switch -->
+                      <div class="col s12 m4">
+                        <div class="switch right">
+                        <label>
+                          Off
+                          <input type="checkbox" checked="checked">
+                          <span class="lever"></span>
+                          On
+                        </label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="row" style="margin-top: 20px;">
+                      <!-- Switch Title -->
+                      <div class="col s12 m8">
+                        <span>Cras laoreet dui</span>
+                      </div>
+                      <!-- Switch -->
+                      <div class="col s12 m4">
+                        <div class="switch right">
+                        <label>
+                          Off
+                          <input type="checkbox">
+                          <span class="lever"></span>
+                          On
+                        </label>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="divider"></div>
+                    <div class="buttons" style="margin-top: 20px;">
+                      <button class="waves-effect waves-light btn" type="submit" name="action1"><i class="material-icons right">done</i>Save changes</button>
+                      <button class="waves-effect waves-light btn blue-grey lighten-2" type="submit" name="action2"><i class="material-icons right">clear</i>Cancel</button>
+                    </div>
+                  </div>
+                </div>
+                 </div>
+                 </form>
+                 </div>
+                 <!-- Privacy tab END -->
+                </div>
+                  </div>      
+                </div>
+              </div>
+              </div>
+            
+       
+        </div>   
+      </div>
+   
+  </div>
+</div>
+<!-- Main END --> 
+
+<script type="text/javascript">
+   $('.datepicker').pickadate();
+  // $( document ).ready(function(){
+    
+  //     $('select').material_select();
+  // })
+
+
+   $(document).ready(function() {
+          $('.settings').change(function() {
+                           
+                  var name = $(this).data("id");
+                  $.ajax({
+                       type: "GET",// GET in place of POST
+                       contentType: "application/json; charset=utf-8",
+                       url: "/update_settings",
+                       data : {name:name, value: $(this).is(":checked") },
+                       dataType: "json"
+                  });
+                  
+          });
+      });
+</script>

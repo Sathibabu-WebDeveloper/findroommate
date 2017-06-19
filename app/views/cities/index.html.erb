@@ -1,0 +1,91 @@
+<main>
+ <nav>
+    <div class="nav-wrapper">
+      <div class="col s12">
+        <a href="#!" class="breadcrumb">First</a>
+        <a href="#!" class="breadcrumb">Second</a>
+        <a href="#!" class="breadcrumb">Third</a>
+      </div>
+    </div>
+  </nav>
+  
+      
+ <div class="row"> 
+   <div class="col s12 m12">   
+   <div class="card-panel grey lighten-5 z-depth-1">
+          <%= link_to  new_city_path, :class => 'btn-floating btn-small waves-effect waves-light' do%>
+          <i class="mdi-content-add-circle"></i><%end%>
+          <a class="waves-effect waves-light btn-floating modal-trigger" href="#modal1">
+            <i class="mdi-action-get-app"></i></a>
+          <%= link_to cities_path(format: "xls") , :class => 'btn-floating btn-small waves-effect waves-light ' do%>
+          <i class="mdi-editor-publish"></i><%end%>
+        </div>
+    </div>
+    <div class="col s12 m12">    
+        <div class="card-panel grey lighten-5 z-depth-1">
+        
+        <table class="bordered highlight" id="cities">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @cities.each do |city| %>
+              <tr>
+                <td>
+                  <%= best_in_place city, :name, :as => :input %>
+                  <%#= city.name %></td>
+               
+                <td><%#= link_to  edit_city_path(city) do%>
+                  <!-- <i class="mdi-content-create"></i> --><%#end%>
+                <%= link_to  city, method: :delete, data: { confirm: 'Are you sure?' } do%> 
+                 <i class="mdi-action-delete"></i><%end%></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        </div>
+      
+    </div>
+  </div>
+</main>  
+
+ <div id="modal1" class="modal" style="z-index: 1003; display: none; opacity: 0; transform: scaleX(0.7); top: 248.791px;">
+  <div class="modal-content">
+    <h4 class="light">Import Cities</h4>
+       <%= form_tag import_cities_path, multipart: true do %>
+
+       
+
+             <div class="row">
+                <div class="file-field input-field col s12">
+                <div class="btn">
+                  <span>File</span>
+                   <%= file_field_tag :file%>
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload Excel file only..">
+                </div>
+              </div>
+              </div>
+
+          <div class="form-actions">
+            <%= submit_tag "Import",:class => 'btn  waves-effect waves-light'  %>
+          </div>
+        <% end %>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-secondary-color btn-flat ">CLOSE</a>    
+  </div>
+</div>
+
+<script type="text/javascript">
+
+      $( document ).ready(function() {     
+        $('#cities').dynatable();
+      });
+</script>
+    

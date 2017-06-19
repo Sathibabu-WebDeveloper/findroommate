@@ -1,0 +1,68 @@
+
+
+
+<!-- Main START -->
+<main class="valign-wrapper">
+  <div class="container valign">
+    
+  <!--  Tables Section-->
+      <div id="login" class="row">
+    <!-- <h1 class="thin">Login</h1> -->
+    <div class="col s12 m8 l6 offset-m2 offset-l3 card-panel">
+     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="row primary-color form-header">
+          <div class="col s4">
+            <img src="./MateriAll - Material Design Admin login_files/admin-logo-full.svg" alt="logo" class="logo responsive-img-height">
+          </div>
+      <div class="col s8 right-align">
+            <h4 class="light white-text">Login</h4>
+          </div>
+        </div>
+    <div class="form-body">
+        <div class="row">
+          <div class="input-field col s12">
+            <!-- <i class="mdi-social-person prefix"></i> -->
+            <%= f.input :email, required: true, autofocus: true , :class => 'validate'%>
+            
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <!-- <i class="mdi-action-lock prefix"></i> -->
+            <%= f.input :password, required: true %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= f.button :submit, "Log in" %>
+          </div>
+        </div>
+       
+    </div>
+    <% end %>
+    </div>
+  </div>
+  </div><!-- container end --> 
+
+</main>
+<!-- Main END --> 
+
+<%#= render "admins/shared/links" %>
+<style type="text/css">
+html,
+body{
+    height: 100%;
+}
+main {
+    padding: 0 !important;
+}
+.form-header {
+    padding: 12px 24px 12px 12px;
+}
+.form-header .col{
+  height:64px;
+}
+.form-body {
+    padding: 12px 24px;
+}
+</style>

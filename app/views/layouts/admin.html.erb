@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rooms</title>
+  <%= stylesheet_link_tag    'https://fonts.googleapis.com/icon?family=Material+Icons' %>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<%=render 'shared/adminsidemenu'%>
+ <% flash.each do |key, value| %>
+ <script>
+    Materialize.toast('<%=value%>', 4000)
+ </script>
+<% end %>
+<%= yield %>
+
+</body>
+<!-- Include javascript per-controller - vendor plugins -->
+    <%#= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
+</html>

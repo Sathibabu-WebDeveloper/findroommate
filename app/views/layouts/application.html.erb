@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rooms</title>
+  <%= stylesheet_link_tag    'https://fonts.googleapis.com/icon?family=Material+Icons' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body ng-app = "frm">
+<!-- Dropdown Structure -->
+
+<div class="navbar-fixed">
+ <nav class=".button-collapse">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo">Logo</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down" style="  margin-right: 10px;">
+         <% if user_signed_in? %>     
+         <a class="dropdown-button btn" href="#" data-activates="dropdown1">Profile</a><ul id="dropdown1" class="dropdown-content">
+          <li><%= link_to "Profile", user_profile_path %></li>
+          <li><a href="#!">two</a></li>
+          <li class="divider"></li>
+          <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+        </ul>
+
+        
+        <%else%>
+        <li><a href="/users/sign_in" >login</a></li>
+        <% end %>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+       <% if user_signed_in? %>                   
+        <li><%= link_to "Logout", destroy_user_session_path, :method => :delete %></li>
+        <%else%>
+        <li><a href="/users/sign_in" >login</a></li>
+        <% end %>
+      
+      </ul>
+    </div>
+  </nav>
+</div>
+
+ <% flash.each do |key, value| %>
+ <script>
+    Materialize.toast('<%=value%>', 4000)
+ </script>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>
+<script type="text/javascript">
+
+$( document ).ready(function(){
+	 $(".button-collapse").sideNav();
+})
+</script>

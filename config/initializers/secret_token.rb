@@ -1,0 +1,1 @@
+Rooms::Application.config.secret_key_base = '7199b9b1ca51f5228a1b6354b719dd5149d9bf205c2070d1999505fda1bba9cc1e7651eac1f6bd3f1b1c3652e7873e950f9a80cb29bf4ef4639932632d99af7f'

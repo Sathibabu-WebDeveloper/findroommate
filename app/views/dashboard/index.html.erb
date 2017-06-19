@@ -1,0 +1,273 @@
+<main>
+  <div class="container">
+   
+    <div id="dashboard">
+    
+    <div class="row"> 
+        <!-- Total Profit BAR graph START -->
+        <div class="col s12 m6 l3">
+          <div class="card cyan accent-4 hoverable">
+            <div class="card-content"> <span class="card-title white-text countup" data-from="25" data-to="7800" data-speed="1000">7800</span> <span class="card-title white-text">$</span>
+              <p class="white-text">Total Profit </p>
+              <canvas id="graph-bar1" height="59" width="179" style="width: 179px; height: 59px;"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Total Profit BAR END --> 
+        <!-- Average Monthly BAR graph START -->
+        <div class="col s12 m6 l3">
+          <div class="card yellow accent-4 hoverable">
+            <div class="card-content"> <span class="card-title white-text countup" data-from="25" data-to="1489" data-speed="1000">1489</span> <span class="card-title white-text">$</span>
+              <p class="white-text">Average Monthly</p>
+              <canvas id="graph-bar2" height="59" width="179" style="width: 179px; height: 59px;"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- Average Monthly BAR END --> 
+        <!-- New Orders BAR graph START -->
+        <div class="col s12 m6 l3">
+          <div class="card deep-orange hoverable">
+            <div class="card-content"> <span class="card-title white-text countup" data-from="2" data-to="64" data-speed="1000">64</span>
+              <p class="white-text">New Orders</p>
+              <canvas id="graph-bar3" height="59" width="179" style="width: 179px; height: 59px;"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- New Orders BAR END --> 
+        <!-- New Users BAR graph START -->
+        <div class="col s12 m6 l3">
+          <div class="card primary-color hoverable">
+            <div class="card-content"> <span class="card-title white-text countup" ><%=User.all.count%></span>
+              <p class="white-text">Total Registred Users</p>
+              <canvas id="graph-bar4" height="59" width="179" style="width: 179px; height: 59px;"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- New Users BAR graph END --> 
+    </div>
+    <div class="row"> 
+        <!-- LINE graph START -->
+        <div class="col s12 m8">
+          <div class="card">
+          	<i class="mdi mdi-bell"></i>
+            <div class="card-header"> <span class="card-title secondary-color-text">Visitors </span> <span class="card-title soft-text"> / </span> <span class="card-title primary-color-text"> Sales</span> </div>
+            <div class="divider"></div>
+            <div class="card-content">
+              <canvas id="graph-lined" height="291" width="582" style="width: 582px; height: 291px;"></canvas>
+            </div>
+          </div>
+        </div>
+        <!-- LINE graph END --> 
+        <!--DOUGHNUT graph START -->
+        <div class="col s12 m4">
+          <div class="card">
+            <div class="card-header"> <span class="card-title cyan-text text-accent-4">New </span> <span class="card-title soft-text"> / </span> <span class="card-title amber-text text-darken-3"> Returning</span>
+              <p>Last 30 days</p>
+            </div>
+            <div class="divider"></div>
+            <div class="card-content" style="padding:40px;">
+              <canvas id="graph-doughnut" width="220" height="220" style="width: 220px; height: 220px;">
+            </canvas></div>
+          </div>
+        </div>
+        <!--DOUGHNUT graph END --> 
+    </div>
+      <div class="row"> 
+        <!-- Latest Tasks START -->
+        <div class="col s12 m6">
+          <div id="tasks" class="card hoverable">
+            <ul class="collection with-header">
+              <li class="collection-header primary-color">
+                <h5 class="light secondary-color-text">My Tasks <a href="#!" class="secondary-content tooltipped" data-position="bottom" data-delay="50" data-tooltip="View All" data-tooltip-id="1fde8fe0-4fd6-93f2-058e-5fb709c9564e"><i class="material-icons secondary-color-text">arrow_forward</i></a></h5>
+              </li>
+              <li class="collection-item in-progress">
+                <p>Create e-commerce cards<br>
+                  <span class="badge static pink accent-4">UI/UX</span> <span class="secondary-content">25%</span> </p>
+                <div class="progress">
+                  <div class="determinate" style="width: 25%"></div>
+                </div>
+              </li>
+              <li class="collection-item in-progress">
+                <p>Implement another smart JS<br>
+                  <span class="badge static blue">Development</span> <span class="secondary-content">67%</span> </p>
+                <div class="progress">
+                  <div class="determinate" style="width: 67%"></div>
+                </div>
+              </li>
+              <li class="collection-item finished">
+                <p>SASS code revision<br>
+                  <span class="badge static blue">Development</span> <span class="secondary-content"><i class="material-icons">check</i></span> </p>
+              </li>
+              <li class="collection-item finished">
+                <p>Extra additions<br>
+                  <span class="badge static amber accent-3">Bonus</span> <span class="secondary-content"><i class="material-icons">check</i></span> </p>
+              </li>
+              <li class="collection-item finished">
+                <p>Extend code blocks notations<br>
+                  <span class="badge static blue">Development</span> <span class="secondary-content"><i class="material-icons">check</i></span> </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- Latest Tasks END --> 
+        <!-- Gallery START -->
+        <div class="col s12 m6">
+          <div class="card secondary-color">
+            <div class="card-header"> <span class="card-title primary-color-text">New images</span> </div>
+            <div class="card-content no-padding">
+              <div id="gallery" class="justified-gallery" style="height: 581.945px;"> <div class="jg-entry" style="width: 192px; height: 128.984px; top: 5px; left: 5px; opacity: 1;"><div class="material-placeholder"><img src="img/wall-clock-detail_m.jpg" class="materialboxed responsive-img initialized" data-caption="Wall-clock"></div></div> <div class="jg-entry" style="width: 120px; height: 128.984px; top: 5px; left: 202px; opacity: 1;"><div class="material-placeholder"><img src="img/discounts_c01.jpg" class="materialboxed responsive-img initialized" data-caption="Discounts shopping cart"></div></div> <div class="jg-entry" style="width: 129px; height: 128.984px; top: 5px; left: 327px; opacity: 1;"><div class="material-placeholder"><img src="img/sun-glasses_01.jpg" class="materialboxed responsive-img initialized" data-caption="Smiling sun with glasses"></div></div> <div class="jg-entry" style="width: 267px; height: 178.972px; top: 138.984px; left: 5px; opacity: 1;"><div class="material-placeholder"><img src="img/flaming_m02.jpg" class="materialboxed responsive-img initialized" data-caption="Wild flames"></div></div> <div class="jg-entry" style="width: 179px; height: 178.972px; top: 138.984px; left: 277px; opacity: 1;"><div class="material-placeholder"><img src="img/idea-bulb.jpg" class="materialboxed responsive-img initialized" data-caption="Idea bulb"></div></div> <div class="jg-entry" style="width: 451px; height: 253.989px; top: 322.956px; left: 5px; opacity: 1;"><div class="material-placeholder"><img src="img/bm-using-laptop_m01.jpg" class="materialboxed responsive-img initialized" data-caption="Businessman using laptop"></div></div> </div>
+            </div>
+          </div>
+        </div>
+        <!-- Gallery END --> 
+        
+      </div>
+      <div class="section">
+        <p>NOTE: Mauris sed erat ac dolor pretium tincidunt in et metus.</p>
+      </div>
+    </div>
+  </div>
+  <!-- container END --> 
+  
+</main>
+
+<script>
+		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+		var lineChartData = {
+			labels : ["January","February","March","April","May","June","July"],
+			datasets : [
+				{
+					label: "My First dataset",
+					fillColor : "rgba(99,129,143,0.2)",
+					strokeColor : "rgba(99,129,143,1)",
+					pointColor : "rgba(99,129,143,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(99,129,143,1)",
+					data : [24,37,52,45,68,72,85]
+				},
+				{
+					label: "My Second dataset",
+					fillColor : "rgba(150,203,0,0.2)",
+					strokeColor : "rgba(150,203,0,1)",
+					pointColor : "rgba(150,203,0,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(150,203,0,1)",
+					data : [31,42,58,35,60,80,95]
+				}
+			]
+		}
+		
+		var doughnutData = [
+				{
+					value: 42,
+					color:"#00b8d4",
+					label: "New"
+				},
+				{
+					value: 58,
+					color:"#ff8f00",
+					label: "Returning"
+				}
+
+			];
+			
+		var barChartData1 = {
+		labels : ["2010","2011","2012","2013","2014","2015"],
+		datasets : [
+			{
+				fillColor : "rgba(255,255,255,0.5)",
+				strokeColor : "rgba(255,255,255,0.8)",
+				highlightFill : "rgba(255,255,255,0.75)",
+				highlightStroke : "rgba(255,255,255,1)",
+				data : [380,900,1600,2300,4000,4800]
+			}
+		]
+
+	}
+		var barChartData2 = {
+		labels : ["1","2","3","4","5","6"],
+		datasets : [
+			{
+				fillColor : "rgba(255,255,255,0.5)",
+				strokeColor : "rgba(255,255,255,0.8)",
+				highlightFill : "rgba(255,255,255,0.75)",
+				highlightStroke : "rgba(255,255,255,1)",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+			}
+		]
+
+	}
+	var barChartData3 = {
+		labels : ["1","2","3","4","5","6"],
+		datasets : [
+			{
+				fillColor : "rgba(255,255,255,0.5)",
+				strokeColor : "rgba(255,255,255,0.8)",
+				highlightFill : "rgba(255,255,255,0.75)",
+				highlightStroke : "rgba(255,255,255,1)",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+			}
+		]
+
+	}
+	var barChartData4 = {
+		labels : ["1","2","3","4","5","6"],
+		datasets : [
+			{
+				fillColor : "rgba(255,255,255,0.5)",
+				strokeColor : "rgba(255,255,255,0.8)",
+				highlightFill : "rgba(255,255,255,0.75)",
+				highlightStroke : "rgba(255,255,255,1)",
+				data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+			}
+		]
+
+	}
+
+	window.onload = function(){
+	
+		/* Prepare gallery items to work with Materialbox */
+		$( "#gallery .material-placeholder" ).wrap( "<div></div>" );
+		/* Initialize gallery */
+		$('#gallery').justifiedGallery({
+			lastRow : 'justify',
+			margins : 5
+		});
+		
+	/* Hide Preloader */
+	$('.preloader-wrapper').css({ display: "none" });
+	
+	/* Fade to page */
+	$('.stage').velocity({ opacity: 0 }, 1000, function() { 
+		$('body').removeClass('loading');
+	});
+	
+	/* Display Graphs and Counting with delay */
+	setTimeout(function() {  
+		var ctx1 = document.getElementById("graph-lined").getContext("2d");
+		window.myLine = new Chart(ctx1).Line(lineChartData, {responsive: true});
+		
+		var ctx2 = document.getElementById("graph-doughnut").getContext("2d");
+		window.myDoughnut = new Chart(ctx2).Doughnut(doughnutData, {responsive : true});
+		
+		var ctxB1 = document.getElementById("graph-bar1").getContext("2d");
+		window.myBar1 = new Chart(ctxB1).Bar(barChartData1, {responsive : true, animation: false, showScale: false, scaleShowLabels: false, barValueSpacing : 3, barShowStroke : false, scaleShowGridLines : false});
+		
+		var ctxB2 = document.getElementById("graph-bar2").getContext("2d");
+		window.myBar2 = new Chart(ctxB2).Bar(barChartData2, {responsive : true, animation: false, showScale: false, scaleShowLabels: false, barValueSpacing : 3, barShowStroke : false, scaleShowGridLines : false});
+		
+		var ctxB3 = document.getElementById("graph-bar3").getContext("2d");
+		window.myBar3 = new Chart(ctxB3).Bar(barChartData3, {responsive : true, animation: false, showScale: false, scaleShowLabels: false, barValueSpacing : 3, barShowStroke : false, scaleShowGridLines : false});
+		
+		var ctxB4 = document.getElementById("graph-bar4").getContext("2d");
+		window.myBar4 = new Chart(ctxB4).Bar(barChartData4, {responsive : true, animation: false, showScale: false, scaleShowLabels: false, barValueSpacing : 3, barShowStroke : false, scaleShowGridLines : false});
+		
+		$('.countup').countTo();
+	}, 200);	
+		
+	}
+
+
+	</script>

@@ -1,0 +1,100 @@
+<div class="row"> 
+    <div class="col s12 m3" style="">
+          <%=render 'navigation' %>
+    </div>
+      <div class="col s12 m9">
+        <% @listings.each do |listing| %>
+          <div class="card-panel grey lighten-5" style="padding: 10px" >
+           <%@pic = Picture.where(:listing_id => listing.id).first%>
+            <div class="row" >
+              <div class="col m3 " style="height: 150px;"> 
+                       
+                <%=  image_tag @pic.file.url(:thumb),:class =>"responsive-img",:style => "m"   if @pic.present?  %> <!-- notice the "circle" class -->
+                <label>Posted on <%=time_ago_in_words(listing.created_at)%> ago</label>
+              </div>
+              
+              <div class="col m9">
+
+                <div class="row"> 
+                  <div class="col m6">
+
+                       <span class="media-heading truncate">
+                        <%= link_to listing.title, show_listing_path(listing) %>
+                      </span>
+                      <label style="display:block">Address</label>
+
+                      <address style="font-size: 12px;"><%=listing.area.name if listing.area.present? %><%=listing.landmark%></address>
+                      <div class="row">
+
+                         <div class="col m6">
+                           <label style="display:block">Security Deposit</label>
+                            <span class="media-heading inline"> <%=listing.security_deposit%> </span> <label> onwards</label>
+                        </div>
+                         <div class="col m6">
+                            <label style="display:block">Minimum Stay</label>
+                            <span class="media-heading inline"><%=listing.minimumstay%> </span> <label> Months</label>
+                        </div>
+
+                      </div>
+
+
+                  </div>
+                  <div class="col m6">
+
+                    <div class="row">
+
+
+
+                        <div class="col m6">
+                          <label style="display:block">Rent</label>
+                          <span class="media-heading inline"><%=listing.rent%> </span> <label> onwards</label>
+                        </div>
+                          <div class="col m6">
+                          <label style="display:block">Available From</label>
+                          <span class="media-heading inline">  <%=listing.available_from%> </span>
+                        </div>
+
+                        <div class="col m12">
+                          <br>
+                            
+                           <p>
+                            Remove from favorites<%= link_to raw('<i class="small material-icons">stars</i>'), dislike_listing_path(:id => listing) , method: :put%>
+                            
+                           </p>
+                          <p><%#= rating_for listing, "features" %></p>
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <%end%>
+
+          <% if @listings.empty?%>
+          <p>No Favorites are found..</p>
+          <%end%>
+      </div>
+</div>
+
+
+
+
+
+
+<style type="text/css">
+.media-heading{
+  font-size: 18px !important;
+}
+.row{
+  margin-bottom: 0px !important;
+}
+.listings{
+   height: 650px;
+    overflow: auto;
+}
+</style>
+
+      

@@ -1,0 +1,15 @@
+<%= simple_form_for(@rule,:validate => true) do |f| %>
+  <%= f.error_notification %>
+
+
+ <div class="row">
+  <div class="input-field col s12">
+    <%= f.input :name %>
+  </div>
+</div>
+
+  <div class="form-actions">
+    <%= f.button :submit,:class => 'btn  waves-effect waves-light'  %>
+    <%= link_to 'Back', rules_path,:class => 'btn  waves-effect waves-light' %>
+  </div>
+<% end %>

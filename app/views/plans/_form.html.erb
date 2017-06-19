@@ -1,0 +1,39 @@
+<%= simple_form_for(@plan,:validate => true) do |f| %>
+  <%= f.error_notification %>
+
+<div class="row">
+  <div class="input-field col s12">
+    <%= f.input :title %>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+    <%= f.input :price %>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s6">
+    <%= f.input :duration %>
+  </div>
+   <div class="input-field col s6">
+    <%= f.input :duration_type, collection: [ "Months", "Year" ], prompt: "Select Duration Peroid", label: false %>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+    <%= f.input :limit %>
+  </div>
+</div>
+<div class="row">
+  <div class="input-field col s12">
+    <%= f.input :description , :input_html => { :class => "materialize-textarea" }%>
+  </div>
+</div>
+
+
+  <div class="form-actions">
+    <%= f.button :submit,:class => 'btn  waves-effect waves-light'  %>
+    <%= link_to 'Back', plans_path,:class => 'btn  waves-effect waves-light' %>
+  </div>
+
+<% end %>

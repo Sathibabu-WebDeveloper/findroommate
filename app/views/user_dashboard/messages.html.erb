@@ -1,0 +1,123 @@
+<!-- Main START -->
+
+
+
+<div class="">
+  <div class="row"> 
+    <div class="col s12 m12">
+     
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col s12 m3" style="">
+    
+        
+          <%=render 'navigation' %>
+         
+     
+    </div>
+      <div class="row">
+        <div class="col s12 m9">
+           
+          <div class="" style="padding: 0px">
+            
+              <!--  Tables Section-->
+              <div id="messages" class="mailbox section">
+                <div class="row">
+                  <div class="col s12">
+                    <div class="z-depth-1">
+                      <nav class="z-depth-0">
+                        <div class="nav-wrapper">
+                          <div class="col s10 m7">
+                            <form>
+                              <div class="input-field round-in-box">
+                                <input id="search" type="search" required="">
+                                <label for="search"><i class="material-icons">search</i></label>
+                                <i class="material-icons">close</i> </div>
+                            </form>
+                          </div>
+                          <div class="col s2 m5">
+                            <ul class="right">
+                                  <li><a href="#!" id="destroy"><i class="mdi-action-delete"></i></a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </nav>
+                    
+                    </div>
+                  </div>
+                  <div class="col s12">
+                    <div class="card-panel no-padding">
+                  <!--  MAIN mailbox START-->
+                      <div id="main-mailbox" style="display: block;">
+                     
+                          <table class="list bordered highlight">
+                            <thead>
+                              <tr>
+                                <th colspan="2" class="first"></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+
+                              <% @messages.each do |msg| %>
+                              <tr class="<%=msg.status == true ? 'readed' : 'unreaded' %>">
+                                <td class="check-col"><input type="checkbox" id="<%=msg.id%>" class="filled-in" name="messages" value="<%=msg.id%>">
+                                  <label for="<%=msg.id%>"></label></td>
+                                <td><a href="/show_message/<%=msg.id%>" class="cell-row">
+                                  <div class="cell"> <span class="simple-avatar small circle left teal accent-3"><%=msg.name[0] %></span>
+                                    <h6><%=msg.name %></h6>
+                                    <p><%=msg.listing.title%></p>
+                                  </div>
+                                  <div class="cell w2 last"> <span class="new badge static"></span> <span class="datetime"><%=time_ago_in_words(msg.created_at) %> ago</span> </div>
+                                  </a></td>
+                              </tr>
+                              <%end%>
+                            </tbody>
+                          </table>
+                        
+                        <div class="center-align row">
+                        
+                        <%= will_paginate @messages %>
+                        </div>
+                      </div>
+                <!--  MAIN mailbox END -->
+              
+                    </div>
+                    
+                    
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+       
+        </div>   
+      </div>
+   
+  </div>
+</div>
+<!-- Main END --> 
+
+<script type="text/javascript">
+$('#destroy').click(function  (argument) {
+ var ids = [];
+  $.each($("input[name='messages']:checked"), function(){            
+      ids.push($(this).val());
+  });
+  if(ids.length > 0){
+    $.ajax({
+       type: "GET",// GET in place of POST      
+       url: "/destroy_multiple_messages",
+       data : {ids:ids}
+  });
+  }  
+})
+</script>
+<style type="text/css">
+.readed{
+  background-color: #F5FCFF;
+}
+</style>

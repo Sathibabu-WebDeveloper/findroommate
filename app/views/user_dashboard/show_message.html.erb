@@ -1,0 +1,73 @@
+<!-- Main START -->
+
+
+
+<div class="">
+  <div class="row"> 
+    <div class="col s12 m12">
+     
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col s12 m3" style="">
+    
+        
+          <%=render 'navigation' %>
+         
+     
+    </div>
+      <div class="row">
+        <div class="col s12 m9">
+           
+          <div class="" style="padding: 0px">
+           
+              <!--  Tables Section-->
+              <div id="messages" class="mailbox section">
+                <div class="row">
+                  <div class="col s12">
+                    <div class="z-depth-1">
+                      <nav class="z-depth-0">
+                        <div class="nav-wrapper">
+                          <div class="col m12">
+                          <ul class="left">
+                                  <li><a href="/user_messages">Back</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </div>                        
+                        </div>
+                      </nav>
+                    
+                    </div>
+                  </div>
+                  <div class="col s12">
+                    <div class="card-panel no-padding">
+                  <!--  MAIN mailbox START-->
+                     
+                      <div id="main-mailbox" style="display: block;">
+                        <div class="left-align row" style="padding:5px 20px">
+                          <h4><%=@message.listing.title%></h4>
+                        <p>From : <%=@message.name%></p>
+                        <p>Phone No : <%=@message.phoneno%></p>
+                        <p>Message : <%=@message.message%></p>
+                        </div>
+                      </div>
+                    
+                <!--  MAIN mailbox END -->
+                    
+                    </div>
+                    
+                    
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+       
+        </div>   
+      </div>
+   
+  </div>
+</div>
+<!-- Main END --> 

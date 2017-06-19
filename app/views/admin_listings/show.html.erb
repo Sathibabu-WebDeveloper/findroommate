@@ -1,0 +1,155 @@
+
+
+<!-- Main START -->
+
+
+<div class="row"> 
+    <div class="col s12 m12">
+     
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col s12 m3" style="">
+    
+        
+           <ul class="collection">
+            <li class="collection-item">
+              <%= link_to "Profile", user_dashboard_path %>
+            </li>
+            <li class="collection-item">
+              <%= link_to "Messages", user_messages_path %>
+            </li>
+             <li class="collection-item">
+              <%= link_to "Listings", listings_path %>
+            </li>
+             <li class="collection-item">
+              <%= link_to "Profile", user_dashboard_path %>
+            </li>
+          </ul>
+         
+     
+    </div>
+
+
+ <div class="col s12 m9">    
+  <div class="row"> 
+      <div class="col s12 m12">          
+          <div class="col s12 card-panel">
+            <ul class="tabs">
+              <li class="tab col s3"><a class="active" href="#test1">Room Info</a></li>
+              <li class="tab col s3"><a  href="#test2">Test 2</a></li>           
+              <li class="tab col s3"><a href="#test4">Gallery</a></li>
+            </ul>
+          </div>
+          <div id="test1" class="col s12 card-panel">
+         
+		            <h4 class="title" style="display: block">About the flatshare</h4>
+		            <ul style="display: block;">
+		              <li><%=@listing.room_type%></li>
+		              <li><%=@listing.bedrooms%> bedroom(s) total</li>
+		              <li><%=@listing.rooms_for_rent%> bedroom(s) available</li>            
+		              <li><%=@listing.minimumstay%> months minimum stay</li>
+		              <li>Available from <%=@listing.available_from%> </li>
+		             
+		            </ul>
+		             <h4 class="title" style="display: block">Ideal flatmates</h4>
+		                  
+		              <p><%=@listing.prefred_gender%>, from <%=@listing.prefred_age %>  old  <%=@listing.prefred_occupation%> </p>  
+		                <h4 class="title" style="display: block">Description</h4>
+		                  
+		              <p><%=@listing.description%> </p>   
+
+		            <h4 class="title" style="display: block">Amenities</h4>
+		            <ul style="display: block;">
+		            <%@listing.amenities.each do |amenity| %>
+		               <li><%=amenity.name%></li>
+		            <%end%>  
+		             
+		            </ul>  
+
+		            <h4 class="title" style="display: block">House Rules</h4>
+		            <ul style="display: block;">
+		            <%@listing.rules.each do |rule| %>
+		               <li><%=rule.name%></li>
+		            <%end%>  
+		             
+		            </ul>          
+		           
+          </div>         
+          <div id="test2" class="col s12 card-panel">Test 2</div>        
+          <div id="test4" class="col s12 card-panel">
+
+              <% unless @pictures.empty? %>
+                  <% @pictures.each do |pic| %>   
+
+                  
+                  <div class="col m4">
+                    <div class="card">
+                      <div class="card-image" >
+                         <%= image_tag pic.file.url(:medium) %>  
+                       </div>
+                      
+                    </div>
+                  </div>
+              
+
+                                 
+                  <% end %>
+                <% end %>
+
+          </div>
+      </div>
+      
+
+
+</div>
+ 
+</div>
+<!-- Main END --> 
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>
+
+<style type="text/css">
+
+
+
+.demo {
+    width:100%;
+}
+.demo ul {
+    list-style: none outside none;
+    padding-left: 0;
+    margin-bottom:0;
+}
+.demo li {
+    display: block;
+    float: left;
+    margin-right: 6px;
+    cursor:pointer;
+}
+.demo img {
+    display: block;   
+    width: 100%;
+    height: 100%;
+}
+
+.lSGallery li{
+	height: 50px !important;
+}
+.lSGallery li img{
+	width: 100%;
+    height: 100%;
+}
+</style>
+<script type="text/javascript">
+
+
+$('#lightSlider').lightSlider({
+    gallery: true,
+    item: 1,
+    loop: true,
+    slideMargin: 0,
+    thumbItem: 9
+});
+</script>

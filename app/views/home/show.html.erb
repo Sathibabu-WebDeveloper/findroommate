@@ -1,0 +1,188 @@
+
+
+<!-- Main START -->
+
+
+  	<div class="row container">  
+
+  		<div class="col s12 m12" style="margin-top:10px;"> 
+  		 <nav>
+		    <div class="nav-wrapper">
+		      <div class="col s12">
+		        <a href="/" class="breadcrumb fs12">Home</a>
+		        <a  class="breadcrumb fs12">Second</a>
+		        <a  class="breadcrumb fs12"><%=@listing.title%></a>
+		      </div>
+		    </div>
+		  </nav>
+		</div>
+      <div class="col s12 m8"> 
+      	
+	      <div class="card-panel">
+	      	<div class="demo">
+              <ul id="lightSlider">
+                <% unless @pictures.empty? %>
+                  <% @pictures.each do |pic| %> 
+			            <li data-thumb="<%=pic.file.url(:thumb) %>">
+			                <img src="<%=pic.file.url(:medium) %> " />
+			            </li>
+                   <% end %>
+                <% end %>
+                </ul>
+            </div>
+          </div> 
+
+            <div class="card-panel">
+            	 <h4 class="title" style="display: block">About the flatshare</h4>
+		            <ul style="display: block;">
+		              <li><%=@listing.room_type%></li>
+		              <li><%=@listing.bedrooms%> bedroom(s) total</li>
+		              <li><%=@listing.rooms_for_rent%> bedroom(s) available</li>            
+		              <li><%=@listing.minimumstay%> months minimum stay</li>
+		              <li>Available from <%=@listing.available_from%> </li>
+		             
+		            </ul>
+		             <h4 class="title" style="display: block">Ideal flatmates</h4>
+		                  
+		              <p><%=@listing.prefred_gender%>, from <%=@listing.prefred_age %>  old  <%=@listing.prefred_occupation%> </p>  
+		                <h4 class="title" style="display: block">Description</h4>
+		                  
+		              <p><%=@listing.description%> </p>   
+
+		            <h4 class="title" style="display: block">Amenities</h4>
+		            <ul style="display: block;">
+		            <%@listing.amenities.each do |amenity| %>
+		               <li><%=amenity.name%></li>
+		            <%end%>  
+		             
+		            </ul>  
+
+		            <h4 class="title" style="display: block">House Rules</h4>
+		            <ul style="display: block;">
+		            <%@listing.rules.each do |rule| %>
+		               <li><%=rule.name%></li>
+		            <%end%>  
+		             
+		            </ul>          
+	        </div>
+
+	      
+      </div> 
+
+      <div class="col s12 m4">
+          <div class="card-panel" style="text-align:center">
+          	<p>Posted By: <span><%=@listing.user ? @listing.user.profile.first_name : 'Admin' %></span></p>
+            <p>Posted On: <span><%=@listing.created_at.strftime("%B %d, %Y")%></span></p>
+
+             <p>
+             	Add to favorites<%= link_to raw('<i class="small material-icons">stars</i>'), like_listing_path(:id => @listing) , method: :put%>
+                <%#= link_to raw('<i class="material-icons">thumb_down</i>'), dislike_listing_path(:id => @listing), method: :put %><%#=@listing.get_downvotes.size%>
+             </p>
+              <p><%= rating_for @listing, "features" , :cancel => true,  :disable_after_rate => true, :enable_half => true, :half_show => true%></p>
+              <p><%#= rating_for_user @listing, current_user, "features", :star => 5, :half_show => true %></p>
+              <p><%= social_share_button_tag(@listing.title,  :image => "http://foo.bar/images/a.jpg", desc: "The summary of page", via: "MyTwitterName") %></p>
+               
+	      </div> 
+	       <div class="card-panel">
+	       	 <a class="waves-effect waves-light btn modal-trigger" href="#modal1">View Contact</a>
+	      </div> 
+
+	       <div class="card-panel" style="padding:2px">
+	       	<p>Nearest Listings</p>
+	       	<ul class="collection">
+
+	       		<%@listings.each do |listing|%>
+	       		<% pic = listing.pictures.first%>
+			    <li class="collection-item avatar">
+			      <%=  image_tag pic.file.url(:thumb),:class =>"circle" if pic.present?  %>
+			      <span class="title truncate"><%= link_to listing.title, show_listing_path(listing) %></span>
+			       <p><%= rating_for listing, "features" , { readonly: true} %></p>
+			    </li>
+			  	<%end%>
+	      </div> 
+
+      </div>           
+	</div>
+      
+<!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+    <h4 class="light">Contact</h4>
+       <%= simple_form_for(@message,:validate => true,:url => url_for(:action => 'create', :controller => 'home'),:method => :post) do |f| %>      
+       			<%= f.hidden_field :listing_id, :value => @listing.id %>       			
+            <div class="row">
+                <div class="input-field col s12">
+                	<%= f.input :name %>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12">
+                	<%= f.input :phoneno %>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12">
+                	<%= f.input :message%>
+                </div>
+              </div>
+              <%= f.button :submit, :class => 'btn  waves-effect waves-light'%>
+      		  <a  class=" modal-action modal-close waves-effect waves-green btn">Close</a>            
+  			 <% end %>        
+  </div> 
+   
+  </div>
+
+
+<!-- Main END --> 
+
+
+
+<style type="text/css">
+
+
+
+.demo {
+    width:100%;
+}
+.demo ul {
+    list-style: none outside none;
+    padding-left: 0;
+    margin-bottom:0;
+}
+.demo li {
+    display: block;
+    float: left;
+    margin-right: 6px;
+    cursor:pointer;
+}
+.demo img {
+    display: block;   
+    width: 100%;
+    height: 100%;
+}
+
+.lSGallery li{
+	height: 50px !important;
+}
+.lSGallery li img{
+	width: 100%;
+    height: 100%;
+}
+.fs12 {
+	font-size:12px !important;
+}
+img.raty-cancel {
+  display: none;
+}
+</style>
+<script type="text/javascript">
+
+
+$('#lightSlider').lightSlider({
+    gallery: true,
+    item: 1,
+    loop: true,
+    slideMargin: 0,
+    thumbItem: 9
+});
+</script>

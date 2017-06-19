@@ -1,0 +1,177 @@
+              
+                <div class="row">
+                <div class="input-field col s12 city">
+                  <%= f.association :city , prompt: "Select City" ,label: false %>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12 areaslist">
+                  <%= f.association :area, prompt: "Select Area",label: false  %>
+                </div>
+              </div>
+         
+              <div class="row">
+                <div class="input-field col s12">
+                	<%= f.input :title %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :description , :input_html => { :class => "materialize-textarea" } %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :room_type, collection: [ "Flat", "House", "Single" ], prompt: "Select Room Type", selected: @listing.room_type, label: false %> 
+                </div>
+              </div>
+               <div class="row">
+                <div class="input-field col s12">
+                    <%= f.input :furnishing_status, collection: [ "Fully Furnished", "Semi Furnished", "Less Furnished"], prompt: "Furnishing Status", selected: @listing.furnishing_status, label: false %> 
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	  <%= f.input :bedrooms, collection: [ "1", "2", "3", "4","5"], prompt: "Select Total Bedrooms", selected: @listing.bedrooms, label: false %> 
+                </div>
+              </div>
+               <div class="row">
+                <div class="input-field col s12">
+                	  <%= f.input :rooms_for_rent, collection: [ "1", "2", "3", "4","5"], prompt: "Available Rooms for rent", selected: @listing.rooms_for_rent, label: false %> 
+                </div>
+              </div>
+               <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :security_deposit %>
+                </div>
+              </div>
+               <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :rent %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	  <input type="date" class="datepicker" id="listing_available_from" name="listing[available_from]" value="<%=@listing.available_from%>" >
+                	  <label for="available_from">Available From</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :minimumstay %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :current_roommates, collection: [ "1", "2", "3", "4","5"], prompt: "Current Roommates", selected: @listing.current_roommates, label: false %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :prefred_gender, collection: [ "Male", "Female", "Doesn't Mater"], prompt: "Prefered Gender", selected: @listing.prefred_gender, label: false %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	 <%= f.input :prefred_age, collection: ["20 - 30 years", "31 - 40 years","41 - 50 years", "Doesn't matter" ], prompt: "Prefered Age", selected: @listing.prefred_age, label: false %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                	<%= f.input :prefred_occupation, collection: [  "Student", "Employee", "Doesn't matter" ], prompt: "Prefered Occupation", selected: @listing.prefred_occupation,  label: false %> 
+                </div>
+              </div>
+               <div class="row">
+                <div class="input-field col s12">
+                   <%= f.input :landmark %>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12">
+                  <label>Select Amenties</label><br>
+                   <p>           
+                  <% @amenities.each do |amenity| %>
+                  <% check = @listing.amenities.detect{|d| d == amenity} %>
+                    <input  type="checkbox"  id="listing_amenity_ids_<%=amenity.id%>" value="<%=amenity.id%>" name="listing[amenity_ids][]" <%= check.present? ? 'checked' : false %>/>
+                     <label for="listing_amenity_ids_<%=amenity.id%>"><%= "#{amenity.name}"%></label> 
+                   <br />
+                  <% end %>
+                  </p>
+                   <%#=f.association :amenities ,label: false,prompt: "Select Amenities" %>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12">
+                   <label>Select House Rules</label><br>
+                   <p>
+                   <% @rules.each do |rule| %>
+                   <% check = @listing.rules.detect{|d| d == rule} %>
+                    <input  type="checkbox"  id="listing_rule_ids_<%=rule.id%>" value="<%=rule.id%>" name="listing[rule_ids][]" <%= check.present? ? 'checked' : false %>/>
+                      <label for="listing_rule_ids_<%=rule.id%>"><%= "#{rule.name}"%></label> 
+                   <br />
+                  <% end %>
+                  </p>
+                    <%#=f.association :rules, label: false,prompt: "Select House Rules" %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="file-field input-field col s12">
+                <div class="btn">
+                  <span>File</span>
+                   <%= file_field_tag "pictures[]", type: :file, multiple: true%>
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                </div>
+              </div>
+              </div>
+
+               <div class="row">
+               <% unless @pictures.empty? %>
+                  <% @pictures.each do |pic| %>   
+
+                  
+                  <div class="col m3">
+                    <div class="card">
+                      <div class="card-image" style="height:150px;overflow:hidden;">
+                         <%= image_tag pic.file.url(:thumb) , :style => "width:100%;height:100%"%>  
+                       </div>
+                      <div class="card-action">                   
+                        <%= link_to   dellistingpic_path(:pid => pic.id,:lid => @listing.id),  method: :delete, data: { confirm: 'Are you sure?' } do%>
+                        <i class="mdi-action-delete right"></i><%end%> 
+                      </div>
+                    </div>
+                  </div>
+              
+
+                                 
+                  <% end %>
+                <% end %>
+            </div>
+
+               
+               
+                <div class="row"> 
+                  <div class="input-field col s12">
+                    <%= f.button :submit ,:class => 'btn  waves-effect waves-light'%>
+                    <%= link_to 'Back', admin_listings_path,:class => 'btn  waves-effect waves-light red' %>
+                  </div>
+                </div>
+             
+          
+<script>
+
+  $(document).ready(function() {
+    $('.city select').change(function() {     
+      $.ajax({
+        url: "<%= update_areas_path %>",
+        data: {
+          city_id : $('#listing_city_id').val()
+        },
+        dataType: "script"
+      });
+    });
+  });
+   
+</script>

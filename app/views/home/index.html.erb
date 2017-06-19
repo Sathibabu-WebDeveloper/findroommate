@@ -1,0 +1,220 @@
+<!-- Main START -->
+
+
+
+<div class="" ng-controller = "ListingController">
+  <div class="row"> 
+    <div class="col s12 m12">
+     
+    </div>
+  </div>
+  <div class="row"> 
+   <!--  -->
+   <div class="col m3 s12">
+                  
+                    <div class="filter-elements">                         
+                       <div class="filter-container">                            
+                            <input type="hidden" value="1" name="filter">
+                            <input type="hidden" value="" name="term">
+                            <input type="hidden" value="" name="used">
+
+                            <ul class="collapsible" data-collapsible="expandable">
+
+                            <li>
+                                     <div class="collapsible-header active"><i class="fa fa-barcode"></i>Select City </div>
+                                    <div class="collapsible-body" style="padding: 15px;">
+                                        <select class="" ng-model="ListingCity" material-select watch>
+                                            <option ng-repeat="city in cities" value="{{city.name}}">{{city.name}}</option>
+                                        </select>
+                                                
+                                    </div>
+                                </li>
+
+                             
+                                <li>
+                                    <div class="collapsible-header active"><i class="fa fa-barcode"></i>Select Room Rent</div>
+                                    <div class="collapsible-body" style="padding: 15px;">
+                                        <ul>
+                                            <li ng-init="test.from = 1000; test.to = 10000">
+                                              <div sliderrange ng-from="test.from" ng-to="test.to" start=1000 end=10000 step=100></div>
+                                               <table>
+                                                <tr>
+                                                  <td>From: <input type="number" ng-model="test.from" min="1000" step="100"></td>
+                                                   <td>To:<input type="number" ng-model="test.to" min="1000" step="100"></td>
+                                                </tr>
+                                               </table>
+                                             
+                                        </ul>
+                                    </div>
+                                </li>
+                            <!--     <li>
+                                    <div class="collapsible-header active"><i class="fa fa-barcode"></i>Room Features(Amenities)</div>
+                                    <div class="collapsible-body" style="padding: 15px;">
+                                        <ul>
+                                                <li ng-repeat="amenity in amenities">
+                                                    <input  type="checkbox" ng-click="includeAmenity(amenity.name)" name="amenities[]" id="{{amenity.id}}">
+                                                    <label for="{{amenity.id}}">{{amenity.name}}</label>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                </li> -->
+
+                            </ul>
+
+                           
+                        </div>
+                    </div>
+                </div>
+   <!--  -->
+      
+      <div class="col s12 m9 listings " when-scrolled="loadMore()" >
+
+          <div class="search">
+             <div class="input-field round-in-box">
+                <input id="search" type="search" required="" style="border: 1px solid #ccc" placeholder="Search" ng-model="searchText">     
+                <label for="search" style="margin-top: 52px;"><i class="material-icons">search</i></label>  
+               </div>
+          </div>
+              
+
+          <div class="row">
+           <span style="display: block">Set Filters</span>
+              <div class="col m3">
+                 <select class="" ng-model="rentOrder" material-select watch>
+                  <option value="0" >Rent: Low to High</option>
+                  <option value="1">Rent: High to Low</option>
+                </select>
+              </div>
+          </div>    
+       
+          <div class="card-panel grey lighten-5" style="padding: 10px" ng-repeat="listing in listings | filter:searchText | filter:ListingCity | filter:filterRange | limitTo:limit | orderBy : rentorder | filter:amenityFilter" >
+           
+            <div class="row" >
+              <div class="col m3 " style="height: 150px;"> 
+                <img ng-src="{{listing.image_url}}" style="max-width: 100%;max-height: 100%;" class ="responsive-img" />             
+                <%#=  image_tag @pic.file.url(:thumb),:class =>"responsive-img",:style => "m"   if @pic.present?  %> <!-- notice the "circle" class -->
+                <label>Posted on {{ listing.time_ago }} ago</label><%#=time_ago_in_words(listing.created_at)%></span>
+              </div>
+              
+              <div class="col m9">
+
+                <div class="row"> 
+                  <div class="col m6">
+
+                       <span class="media-heading truncate">
+                        <a href="/listing/{{listing.id}}">{{listing.title}}</a>
+                        <%#= link_to listing.title, show_listing_path(listing) %>
+                      </span>
+                      <label style="display:block">Address</label>
+
+                      <address style="font-size: 12px;"> {{listing.area.name}},{{listing.landmark}}<%#=listing.area.name if listing.area.present? %><%#=listing.landmark%></address>
+                      <span style="display:none">{{listing.city.name}}</span>
+                      <br>
+
+                      <div class="row">
+
+                         <div class="col m6">
+                           <label style="display:block">Security Deposit</label>
+                            <span class="media-heading inline">{{listing.security_deposit | currency}} <%#=listing.security_deposit%> </span> <label> onwards</label>
+                        </div>
+                         <div class="col m6">
+                            <label style="display:block">Minimum Stay</label>
+                            <span class="media-heading inline"> {{listing.minimumstay}}<%#=listing.minimumstay%> </span> <label> Months</label>
+                        </div>
+
+                      </div>
+
+
+                  </div>
+                  <div class="col m6">
+
+                    <div class="row">
+
+
+
+                        <div class="col m6">
+                          <label style="display:block">Rent</label>
+                          <span class="media-heading inline"> {{listing.rent | currency}}<%#=listing.rent%> </span> <label> onwards</label>
+                        </div>
+                          <div class="col m6">
+                          <label style="display:block">Available From</label>
+                          <span class="media-heading inline"> {{listing.available_from}} <%#=listing.available_from%> </span>
+                        </div>
+
+                        <div class="col m12">
+                          <br>
+                             <a class="waves-effect waves-light btn modal-trigger" href="#modal1" style="border-radius: 50px;" modal>Contact Owner</a>
+                           <p>
+                              <i class="material-icons">thumb_up</i> ({{listing.up_votes}}<%#=listing.get_upvotes.size%>)
+                              <i class="material-icons">thumb_down</i> ({{listing.down_votes}}<%#=listing.get_downvotes.size%>)
+                           </p>
+                          <p><%#= rating_for listing, "features" %></p>
+                        </div>
+                        
+
+
+
+                    </div>
+
+                  </div>
+                </div>
+
+              
+                  
+
+               
+             
+              
+
+              </div>
+            </div>
+          </div>
+       
+      </div>
+      
+   
+  </div>
+</div>
+<!-- Main END --> 
+
+<!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+    <h4 class="light">Contact</h4>
+       <%= simple_form_for(@message,:validate => true,:url => url_for(:action => 'create', :controller => 'home'),:method => :post) do |f| %>      
+            <%#= f.hidden_field :listing_id, :value => @listing.id %>            
+            <div class="row">
+                <div class="input-field col s12">
+                  <%= f.input :name %>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12">
+                  <%= f.input :phoneno %>
+                </div>
+              </div>
+                <div class="row">
+                <div class="input-field col s12">
+                  <%= f.input :message%>
+                </div>
+              </div>
+              <%= f.button :submit, :class => 'btn  waves-effect waves-light'%>
+            <a  class=" modal-action modal-close waves-effect waves-green btn">Close</a>            
+         <% end %>        
+  </div> 
+   
+  </div>
+
+<style type="text/css">
+.media-heading{
+  font-size: 18px !important;
+}
+.row{
+  margin-bottom: 0px !important;
+}
+.listings{
+   height: 650px;
+    overflow: auto;
+}
+</style>
+

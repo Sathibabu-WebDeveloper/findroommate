@@ -1,0 +1,18 @@
+ <ul class="collection">
+  <li class="collection-item">
+    <i class="material-icons right">picture_in_picture</i><%= link_to "Profile", user_dashboard_path %>
+  </li>
+  <li class="collection-item">
+    <i class="material-icons right">email</i><%= link_to "Messages", user_messages_path %>
+    <%= @unread > 0 ? "(#{@unread})" :  "" %>
+  </li>
+   <li class="collection-item">
+    <i class="material-icons right">subtitles</i><%= link_to "Listings", listings_path %>
+  </li>         
+  <li class="collection-item">
+    <i class="material-icons right">stars</i><%= link_to "Favorites", favorites_path %>
+  </li>
+  <li class="collection-item">
+    <i class="material-icons right">flag</i><%= link_to "Plans", subscriptions_path %>
+  </li>
+</ul>
